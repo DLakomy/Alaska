@@ -1,4 +1,4 @@
-val scala3Version = "3.2.1"
+ThisBuild / scalaVersion := "3.2.1"
 
 lazy val genExampleFile = inputKey[Unit]("Generate example input file") := {
   import complete.DefaultParsers._
@@ -8,8 +8,11 @@ lazy val genExampleFile = inputKey[Unit]("Generate example input file") := {
 
 lazy val root = project
   .in(file("."))
+  .aggregate(common)
   .settings(
     name := "Alaska",
-    scalaVersion := scala3Version,
     genExampleFile
   )
+
+lazy val common = project
+  .in(file("common"))
