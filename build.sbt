@@ -16,3 +16,4 @@ lazy val root = project
 
 lazy val common = project
   .in(file("common"))
+  .settings(libraryDependencies += "org.scalameta" %% "munit" % "1.0.0-M7" % Test)
