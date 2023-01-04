@@ -1,6 +1,6 @@
 package alaska.model
 
-type ValidParse = Either[String, List[Valid.Entry]]
+type ParseResult = Either[String, List[Valid.Entry]]
 
 object Valid {
   sealed trait Entry
