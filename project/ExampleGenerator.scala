@@ -8,7 +8,7 @@ object ExampleGenerator {
     if (recNum%2==0)
       s"""Record: $recNum
          |P01: 321
-         |P02: "sample text "
+         |P02: "sample text"
          |P03:  "sth"
          |%
          |""".stripMargin
