@@ -2,7 +2,8 @@
 
 Why the name `Alaska`? No idea, just sounds good.
 
-I wanted to play with SBT multi-project builds, custom tasks, typeclasses, cats-parse and cats-effect.
+I wanted to play with SBT multi-project builds (the way I split the project is not the best, but it's good enough for my
+purposes), custom tasks, typeclasses, cats-parse and cats-effect.
 This work is something similar to the job I had.
 
 TODO:
