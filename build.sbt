@@ -1,5 +1,7 @@
 ThisBuild / scalaVersion := "3.2.1"
 
+lazy val munit = "org.scalameta" %% "munit" % "1.0.0-M7" % Test
+
 lazy val genExampleFile = inputKey[Unit]("Generate example input file") := {
   import complete.DefaultParsers._
   val args = spaceDelimited("<args>").parsed
@@ -8,7 +10,7 @@ lazy val genExampleFile = inputKey[Unit]("Generate example input file") := {
 
 lazy val root = project
   .in(file("."))
-  .aggregate(common)
+  .aggregate(common, parser)
   .settings(
     name := "Alaska",
     genExampleFile
@@ -16,4 +18,9 @@ lazy val root = project
 
 lazy val common = project
   .in(file("common"))
-  .settings(libraryDependencies += "org.scalameta" %% "munit" % "1.0.0-M7" % Test)
+  .settings(libraryDependencies += munit)
+
+lazy val parser = project
+  .in(file("parser"))
+  .settings(libraryDependencies ++= Seq(munit, "org.typelevel" %% "cats-parse" % "0.3.9"))
+  .dependsOn(common)
