@@ -3,7 +3,7 @@
 Why the name `Alaska`? No idea, just sounds good.
 
 I wanted to play with SBT multi-project builds, custom tasks, typeclasses, cats-parse and cats-effect.
-This work is something similar to the job I had 
+This work is something similar to the job I had.
 
 TODO:
 - [x] readme
@@ -17,6 +17,6 @@ TODO:
 
 What the fanout is? `Valid.Text` should land in one file, `Valid.Num` in another, errors somewhere else.
 They should be valid csv files (apart from errors, which can contain plain text). In case of empty result, the
-valid files shoul be created anyway (with the header).
+valid files should be created anyway (with the header).
 
 There should be a lot of Unit Tests.
