@@ -25,13 +25,15 @@ class RecordParserSpec extends munit.FunSuite {
       """P12: "sample text"
         |P33: 66
         |P123: "another sample text"
+        |P13: 2
         |""".stripMargin
     val obtained = RecordParser.fields.parseAll(input)
     val expected = Right(
       NonEmptyList.of(
         TextField(12, "sample text"),
         NumField(33, 66),
-        TextField(123, "another sample text")
+        TextField(123, "another sample text"),
+        NumField(13, 2),
       )
     )
     assertEquals(obtained, expected)
