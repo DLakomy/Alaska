@@ -1,5 +1,6 @@
 package alaska.parser
 
+import alaska.model._
 import ast.*
 import cats.data.NonEmptyList
 import cats.parse.Parser as P
@@ -23,5 +24,12 @@ object RecordParser {
     case (recId, fields) => Record(recId, fields)
   }
 
-  // TODO cast ast to model
+  private def recToModel(rec: Record): ValidResult = rec.fields.map {
+    case TextField(id, value) => Valid.Text(rec.id, id, value)
+    case NumField(id, value) => Valid.Num(rec.id, id, value)
+  }
+  def parseRecord(input: String): ParseResult = record.parseAll(input).match {
+    case Right(rec) => Right(recToModel(rec))
+    case Left(err) => Left(err.toString)
+  }
 }

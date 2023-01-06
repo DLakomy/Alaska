@@ -1,5 +1,6 @@
 package alaska.parser
 
+import alaska.model._
 import ast.*
 import cats.data.NonEmptyList
 import cats.parse.Parser
@@ -46,7 +47,8 @@ class RecordParserSpec extends munit.FunSuite {
         |""".stripMargin
     val obtained = RecordParser.record.parseAll(input)
     val expected = Right(
-      Record( 42,
+      Record(
+        42,
         NonEmptyList.of(
           TextField(12, "sample text"),
           NumField(33, 66),
@@ -55,5 +57,37 @@ class RecordParserSpec extends munit.FunSuite {
       )
     )
     assertEquals(obtained, expected)
+  }
+
+  test("Returning a correct model representation") {
+    val input =
+      """Record: 42
+        |P12: "sample text"
+        |P33: 66
+        |P123: "another sample text"
+        |%
+        |""".stripMargin
+    val obtained = RecordParser.parseRecord(input)
+    val expected = Right(
+      NonEmptyList.of(
+        Valid.Text(42, 12, "sample text"),
+        Valid.Num(42, 33, 66),
+        Valid.Text(42, 123, "another sample text")
+      )
+    )
+    assertEquals(obtained, expected)
+  }
+
+  test("Returning a failure for a malformed record") {
+    val input =
+      """Record: 42
+        |P12: "sample text"
+        |P33: 66
+        |%
+        |P123: "another sample text"
+        |%
+        |""".stripMargin
+    val obtained = RecordParser.parseRecord(input)
+    assert(obtained.isLeft)
   }
 }

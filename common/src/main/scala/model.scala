@@ -2,7 +2,8 @@ package alaska.model
 
 import cats.data.NonEmptyList
 
-type ParseResult = Either[String, NonEmptyList[Valid.Entry]]
+type ValidResult = NonEmptyList[Valid.Entry]
+type ParseResult = Either[String, ValidResult]
 
 object Valid {
   sealed abstract class Entry
