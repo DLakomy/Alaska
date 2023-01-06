@@ -10,7 +10,7 @@ TODO:
 - [x] readme
 - [x] custom task generating a file similar to something I had to parse one day
 - [x] csv serializer implemented as a typeclass
-- [ ] parser of the "strange format"
+- [x] parser of the "strange format"
 - [ ] simple implementation of the fanout (raw Scala, no Cats Effect)
 - [ ] implementation of the fanout with Cats Effect, as a practical exercise with this lib
 (streaming lib could be useful, but I want to reinvent the wheel, for science)
