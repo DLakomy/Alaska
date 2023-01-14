@@ -45,10 +45,9 @@ object ExampleGenerator {
   def genExampleFile(args: Seq[String]): Unit = {
 
     val samplesCnt = Try(args(0).toInt).getOrElse(0)
-    val filePath = args(1)
 
     if (args.length==2 && samplesCnt > 0) {
-      intGenExampleFile(samplesCnt, filePath)
+      intGenExampleFile(samplesCnt, args(1))
     } else {
       throw new RuntimeException("Usage: genExampleFile <numberOfSamplesToConcat (>0)> <pathToResultFile>")
     }
