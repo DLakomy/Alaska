@@ -12,10 +12,15 @@ import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 // TODO header for csv
 def program(sourcePath: String, numPath: String, txtPath: String, errPath: String): Unit = {
 
+  val header = "rec,field,val\n"
+
   val source = BufferedReader(FileReader(sourcePath))
   val numDest = BufferedWriter(FileWriter(numPath))
   val txtDest = BufferedWriter(FileWriter(txtPath))
   val errDest = BufferedWriter(FileWriter(errPath))
+
+  numDest.write(header)
+  txtDest.write(header)
 
   def handleRecord(record: String): Unit =
     val parsed = RecordParser.parseRecord(record)
