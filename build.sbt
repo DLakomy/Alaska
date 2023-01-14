@@ -13,7 +13,7 @@ lazy val genExampleFile = inputKey[Unit]("Generate example input file") := {
 
 lazy val root = project
   .in(file("."))
-  .aggregate(common, parser)
+  .aggregate(common, parser, simple)
   .settings(
     name := "Alaska",
     genExampleFile
@@ -27,3 +27,8 @@ lazy val parser = project
   .in(file("parser"))
   .settings(libraryDependencies ++= commonDeps:+"org.typelevel" %% "cats-parse" % "0.3.9")
   .dependsOn(common)
+
+lazy val simple = project
+  .in(file("simple"))
+  .settings(libraryDependencies ++= commonDeps)
+  .dependsOn(common, parser)
