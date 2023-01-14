@@ -9,7 +9,6 @@ import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 // I've never wrote a Scala code this ugly...
 // this one is meant to be simple, as a reference for the second implementation
 
-// TODO header for csv
 def program(sourcePath: String, numPath: String, txtPath: String, errPath: String): Unit = {
 
   val header = "rec,field,val\n"
