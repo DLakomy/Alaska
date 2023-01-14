@@ -13,10 +13,17 @@ class RecordParserSpec extends munit.FunSuite {
     assertEquals(obtained, expected)
   }
 
-  test("Parsing number field") {
+  test("Parsing positive number field") {
     val input = "P13: 81"
     val obtained = RecordParser.numField.parseAll(input)
     val expected = Right(NumField(13, 81))
+    assertEquals(obtained, expected)
+  }
+
+  test("Parsing negative number field") {
+    val input = "P13: -81"
+    val obtained = RecordParser.numField.parseAll(input)
+    val expected = Right(NumField(13, -81))
     assertEquals(obtained, expected)
   }
 

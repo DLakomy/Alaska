@@ -14,7 +14,7 @@ object RecordParser {
     case (id, value) => TextField(id, value)
   }
 
-  val numField: P[NumField] = (fieldId.soft ~ digit.rep.string.map(_.toInt)).map {
+  val numField: P[NumField] = (fieldId.soft ~ (P.char('-').? ~ digit.rep).string.map(_.toInt)).map {
     case (id, value) => NumField(id, value)
   }
 
