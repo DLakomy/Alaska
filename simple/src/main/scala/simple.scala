@@ -10,7 +10,12 @@ import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 // this one is meant to be simple, as a reference for the second implementation
 
 // TODO header for csv
-def program(source: BufferedReader, numDest: BufferedWriter, txtDest: BufferedWriter, errDest: BufferedWriter): Unit = {
+def program(source: String, numPath: String, txtPath: String, errPath: String): Unit = {
+
+  val source = BufferedReader(FileReader("example-files/ex1.lst"))
+  val numDest = BufferedWriter(FileWriter(numPath))
+  val txtDest = BufferedWriter(FileWriter(txtPath))
+  val errDest = BufferedWriter(FileWriter(errPath))
 
   def handleRecord(record: String): Unit =
     val parsed = RecordParser.parseRecord(record)
