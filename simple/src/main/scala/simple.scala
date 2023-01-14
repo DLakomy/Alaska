@@ -32,7 +32,7 @@ def program(source: BufferedReader, numDest: BufferedWriter, txtDest: BufferedWr
       handleRecord(accumulator.toString())
       accumulator.clear()
     }
-    // ...isEmpty handles filtering garbage between records
+    // ...nonEmpty handles filtering garbage between records
     else if (accumulator.nonEmpty) accumulator.append(line)+='\n'
     line = source.readLine()
   }
