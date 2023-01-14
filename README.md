@@ -11,7 +11,8 @@ TODO:
 - [x] custom task generating a file similar to something I had to parse one day
 - [x] csv serializer implemented as a typeclass
 - [x] parser of the "strange format"
-- [ ] simple implementation of the fanout (raw Scala, no Cats Effect)
+- [x] simple implementation of the fanout (raw Scala, no Cats Effect) UPDATE: for a file
+generated with `genExampleFile 20000000 bigExample.lst` it took 1 minute 40 seconds
 - [ ] implementation of the fanout with Cats Effect, as a practical exercise with this lib
 (streaming lib could be useful, but I want to reinvent the wheel, for science)
 - [ ] benchmark (simple impl. vs CE; input around 1.5 GB)
