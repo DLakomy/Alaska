@@ -45,7 +45,7 @@ def program(sourcePath: String, numPath: String, txtPath: String, errPath: Strin
     else if (accumulator.nonEmpty) accumulator.append(line)+='\n'
     line = source.readLine()
   }
-  numDest.flush()
-  txtDest.flush()
-  errDest.flush()
+  numDest.close()
+  txtDest.close()
+  errDest.close()
 }
