@@ -26,6 +26,5 @@ given CsvStringSerializer[Valid.Entry] with {
 }
 
 object CsvStringSerializer {
-  def apply[A](using c: CsvStringSerializer[A]): CsvStringSerializer[A] = c
   def serialize[A](input: A)(using c: CsvStringSerializer[A]): String = c.serialize(input)
 }
