@@ -1,6 +1,7 @@
 # Alaska
 
 [![Scala CI](https://github.com/DLakomy/Alaska/actions/workflows/scala.yml/badge.svg?branch=master)](https://github.com/DLakomy/Alaska/actions/workflows/scala.yml)
+[![codecov](https://codecov.io/gh/DLakomy/Alaska/branch/master/graph/badge.svg?token=BI2M5560E4)](https://codecov.io/gh/DLakomy/Alaska)
 
 Why the name `Alaska`? No idea, just sounds good.
 
@@ -19,7 +20,7 @@ generated with `genExampleFile 20000000 bigExample.lst` it took 1 minute 40 seco
 (streaming lib could be useful, but I want to reinvent the wheel, for science) UPDATE: for a file
   generated with `genExampleFile 20000000 bigExample.lst` it took 3 minutes 40 seconds (the task appears to be IO bound,
 so I didn't expect improvement; my implementation isn't the best possible, of course)
-- [ ] github actions (build + code coverage)
+- [x] github actions (build + code coverage)
 
 What the fanout is? See `example-files`. The task is to read a record, parse it and write different types of fields to
 separate files.
