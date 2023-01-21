@@ -13,8 +13,10 @@ TODO:
 - [x] parser of the "strange format"
 - [x] simple implementation of the fanout (raw Scala, no Cats Effect) UPDATE: for a file
 generated with `genExampleFile 20000000 bigExample.lst` it took 1 minute 40 seconds
-- [ ] implementation of the fanout with Cats Effect, as a practical exercise with this lib
-(streaming lib could be useful, but I want to reinvent the wheel, for science)
+- [x] implementation of the fanout with Cats Effect, as a practical exercise with this lib
+(streaming lib could be useful, but I want to reinvent the wheel, for science) UPDATE: for a file
+  generated with `genExampleFile 20000000 bigExample.lst` it took 3 minutes 40 seconds (the task appears to be IO bound,
+so I didn't expect improvement; my implementation isn't the best possible, of course)
 - [ ] benchmark (simple impl. vs CE; input around 1.5 GB)
 
 What the fanout is? `Valid.Text` should land in one file, `Valid.Num` in another, errors somewhere else.
