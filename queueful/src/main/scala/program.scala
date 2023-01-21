@@ -71,20 +71,3 @@ def program(srcPath: String, numPath: String, txtPath: String, errPath: String):
        fileWriter(errPath, errQ) &>
        handleRecord(recordsQ, numQ, txtQ, errQ)
 } yield ()
-
-object Main extends IOApp.Simple {
-
-  def measure[A](fa: IO[A])(using clock: Clock[IO]): IO[A] = {
-
-    for {
-      start <- clock.monotonic
-      result <- fa
-      finish <- clock.monotonic
-      _ <- IO.println(s"Time: ${finish-start}")
-    } yield (result)
-  }
-  import scala.concurrent.duration._
-  override def run: IO[Unit] = measure(program("/Users/dlakomy/Repos/alaska/bigExample.lst", "num.csv", "txt.csv", "err.txt"))
-}
-
-
