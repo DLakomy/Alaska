@@ -17,10 +17,7 @@ generated with `genExampleFile 20000000 bigExample.lst` it took 1 minute 40 seco
 (streaming lib could be useful, but I want to reinvent the wheel, for science) UPDATE: for a file
   generated with `genExampleFile 20000000 bigExample.lst` it took 3 minutes 40 seconds (the task appears to be IO bound,
 so I didn't expect improvement; my implementation isn't the best possible, of course)
-- [ ] benchmark (simple impl. vs CE; input around 1.5 GB)
+- [ ] github actions (build + code coverage)
 
-What the fanout is? `Valid.Text` should land in one file, `Valid.Num` in another, errors somewhere else.
-They should be valid csv files (apart from errors, which can contain plain text). In case of empty result, the
-valid files should be created anyway (with the header).
-
-There should be a lot of Unit Tests.
+What the fanout is? See `example-files`. The task is to read a record, parse it and write different types of fields to
+separate files.
