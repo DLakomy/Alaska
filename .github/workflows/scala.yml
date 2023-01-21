@@ -28,8 +28,11 @@ jobs:
         distribution: 'temurin'
         cache: 'sbt'
     - name: Run tests
-      run: sbt clean coverage test  
+      run: sbt clean coverage test
+    - name: Aggregate coverage reports
+      run: sbt coverageAggregate
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
         fail_ci_if_error: true
+        directory: target
