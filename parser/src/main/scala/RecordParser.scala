@@ -31,6 +31,6 @@ object RecordParser {
   }
   def parseRecord(input: String): ParseResult = record.parseAll(input).match {
     case Right(rec) => Right(recToModel(rec))
-    case Left(err) => Left(err.show)
+    case Left(err) => Left(err.show+"\n")
   }
 }

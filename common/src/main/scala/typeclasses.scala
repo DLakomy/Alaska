@@ -8,12 +8,12 @@ trait CsvStringSerializer[A] {
 
 given CsvStringSerializer[Valid.Num] with {
   def serialize(input: Valid.Num): String =
-    List(input.recNum, input.fieldNum, s"${input.value}").mkString(",")
+    List(input.recNum, input.fieldNum, s"${input.value}").mkString("", ",", "\n")
 }
 
 given CsvStringSerializer[Valid.Text] with {
   def serialize(input: Valid.Text): String =
-    List(input.recNum, input.fieldNum, s"\"${input.value}\"").mkString(",")
+    List(input.recNum, input.fieldNum, s"\"${input.value}\"").mkString("", ",", "\n")
 }
 
 // TODO compiler couldn't figure this out

@@ -24,12 +24,12 @@ def program(sourcePath: String, numPath: String, txtPath: String, errPath: Strin
   def handleRecord(record: String): Unit =
     val parsed = RecordParser.parseRecord(record)
     parsed match
-      case Left(error) => errDest.write(error+'\n')
+      case Left(error) => errDest.write(error)
       case Right(entries) => entries.toList.foreach { entry =>
         val serialized = CsvStringSerializer.serialize(entry)
         entry match
-          case _: Valid.Num => numDest.write(serialized+'\n')
-          case _: Valid.Text => txtDest.write(serialized+'\n')
+          case _: Valid.Num => numDest.write(serialized)
+          case _: Valid.Text => txtDest.write(serialized)
       }
 
   var line = source.readLine()
