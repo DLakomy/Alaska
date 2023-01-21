@@ -1,5 +1,7 @@
 # Alaska
 
+[![Scala CI](https://github.com/DLakomy/Alaska/actions/workflows/scala.yml/badge.svg?branch=master)](https://github.com/DLakomy/Alaska/actions/workflows/scala.yml)
+
 Why the name `Alaska`? No idea, just sounds good.
 
 I wanted to play with SBT multi-project builds (the way I split the project is not the best, but it's good enough for my
