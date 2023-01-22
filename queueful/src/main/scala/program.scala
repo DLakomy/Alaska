@@ -3,9 +3,9 @@ package alaska.queueful
 import alaska.model.Valid
 import alaska.parser.RecordParser
 import alaska.typeclasses.{CsvStringSerializer, given}
-import cats.effect.{Clock, IO, IOApp, Resource, Sync}
+import cats.effect.{IO, Resource}
 import cats.effect.std.Queue
-import cats.syntax.traverse.*
+import cats.syntax.traverse._
 
 import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 import java.nio.file.Path
