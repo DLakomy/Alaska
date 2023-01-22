@@ -32,7 +32,7 @@ def fileReader(filePath: String, recordsQ: OptStrQueue): IO[Unit] = {
   val fileRes = Resource.fromAutoCloseable(IO(BufferedReader(FileReader(filePath))))
 
   def go(source: BufferedReader, accumulator: Vector[String]): IO[Unit] =
-    IO(source.readLine()).flatMap { line =>
+    IO.blocking(source.readLine()).flatMap { line =>
       if (line == null) recordsQ.offer(None)
       else if (line matches "^Record.*") go(source, accumulator:+line)
       else if (line == "%") recordsQ.offer(Some((accumulator:+line).mkString("", "\n", "\n"))) >> go(source, Vector.empty)
@@ -48,7 +48,7 @@ def fileWriter(filePath: String, queue: OptStrQueue, header: Option[String] = No
 
   def go(destination: BufferedWriter): IO[Unit] =
     queue.take.flatMap {
-      case Some(value) => IO(destination.write(value)) >> go(destination)
+      case Some(value) => IO.blocking(destination.write(value)) >> go(destination)
       case None => IO.unit
     }
 
