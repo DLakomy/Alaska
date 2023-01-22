@@ -19,7 +19,7 @@ def handleRecords(recordsQ: OptStrQueue, numQ: OptStrQueue, txtQ: OptStrQueue, e
     case Some(value) =>
       IO(RecordParser.parseRecord(value)).flatMap {
         case Left(error) => errQ.offer(Some(error))
-        case Right(entries) => entries.toList.traverse { entry =>
+        case Right(entries) => entries.traverse { entry =>
           val serialized = CsvStringSerializer.serialize(entry)
           entry match
             case _: Valid.Num => numQ.offer(Some(serialized))
