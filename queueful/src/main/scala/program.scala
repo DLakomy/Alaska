@@ -13,7 +13,7 @@ import java.nio.file.Path
 // None means termination
 type OptStrQueue = Queue[IO, Option[String]]
 
-def handleRecord(recordsQ: OptStrQueue, numQ: OptStrQueue, txtQ: OptStrQueue, errQ: OptStrQueue): IO[Unit] =
+def handleRecords(recordsQ: OptStrQueue, numQ: OptStrQueue, txtQ: OptStrQueue, errQ: OptStrQueue): IO[Unit] =
   recordsQ.take.flatMap {
     case None => numQ.offer(None) >> txtQ.offer(None) >> errQ.offer(None)
     case Some(value) =>
@@ -25,21 +25,22 @@ def handleRecord(recordsQ: OptStrQueue, numQ: OptStrQueue, txtQ: OptStrQueue, er
             case _: Valid.Num => numQ.offer(Some(serialized))
             case _: Valid.Text => txtQ.offer(Some(serialized))
         }.void
-      } >> handleRecord(recordsQ, numQ, txtQ, errQ)
+      } >> handleRecords(recordsQ, numQ, txtQ, errQ)
   }
 
 def fileReader(filePath: String, recordsQ: OptStrQueue): IO[Unit] = {
   val fileRes = Resource.fromAutoCloseable(IO(BufferedReader(FileReader(filePath))))
 
-  def readLine(source: BufferedReader, accumulator: Vector[String]): IO[Unit] = IO(source.readLine()).flatMap { line =>
-    if (line == null) recordsQ.offer(None)
-    else if (line matches "^Record.*") readLine(source, accumulator:+line)
-    else if (line == "%") recordsQ.offer(Some((accumulator:+line).mkString("", "\n", "\n"))) >> readLine(source, Vector.empty)
-    else if (accumulator.isEmpty) readLine(source, accumulator) // acc empty means we're reading garbage between records
-    else readLine(source, accumulator:+line)
-  }
+  def go(source: BufferedReader, accumulator: Vector[String]): IO[Unit] =
+    IO(source.readLine()).flatMap { line =>
+      if (line == null) recordsQ.offer(None)
+      else if (line matches "^Record.*") go(source, accumulator:+line)
+      else if (line == "%") recordsQ.offer(Some((accumulator:+line).mkString("", "\n", "\n"))) >> go(source, Vector.empty)
+      else if (accumulator.isEmpty) go(source, accumulator) // acc empty means we're reading garbage between records
+      else go(source, accumulator:+line)
+    }
 
-  fileRes.use(readLine(_, Vector.empty))
+  fileRes.use(go(_, Vector.empty))
 }
 
 def fileWriter(filePath: String, queue: OptStrQueue, header: Option[String] = None): IO[Unit] = {
@@ -69,5 +70,5 @@ def program(srcPath: String, numPath: String, txtPath: String, errPath: String):
        fileWriter(txtPath, txtQ, Some(header)) &>
        fileWriter(numPath, numQ, Some(header)) &>
        fileWriter(errPath, errQ) &>
-       handleRecord(recordsQ, numQ, txtQ, errQ)
+       handleRecords(recordsQ, numQ, txtQ, errQ)
 } yield ()
