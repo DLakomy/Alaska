@@ -18,7 +18,7 @@ TODO:
 generated with `genExampleFile 20000000 bigExample.lst` it took 1 minute 40 seconds
 - [x] implementation of the fanout with Cats Effect, as a practical exercise with this lib
 (streaming lib could be useful, but I want to reinvent the wheel, for science) UPDATE: for a file
-  generated with `genExampleFile 20000000 bigExample.lst` it took 3 minutes 40 seconds (the task appears to be IO bound,
+  generated with `genExampleFile 20000000 bigExample.lst` it took 2 minutes 40 seconds (the task appears to be IO bound,
 so I didn't expect improvement; my implementation isn't the best possible, of course)
 - [x] github actions (build + code coverage)
 
